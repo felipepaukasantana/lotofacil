@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://admin:admin@18.119.127.205:27017/lotofacil?authSource=admin');
+mongoose.connect('mongodb://admin:admin@34.227.159.20:27017/lotofacil?authSource=admin');
 
 const concursochema = new mongoose.Schema({
     id: Number,

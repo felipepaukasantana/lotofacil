@@ -54,7 +54,7 @@ class ConcursoService {
         });
 
         return response.data;
-    };
+    }
 
     percorrerAposta(aposta, nome, listaDezenas, listaRateioPremio) {
         var acertos = [];
@@ -110,12 +110,85 @@ class ConcursoService {
             valorPremio: valorPremio
         };
     }
+
     async atual() {
         const ConcursosDB = db.Mongoose.model('consurso', db.ConcursoSchema, 'consursos');
 
-        const concurso = await ConcursosDB.find({}).sort({_id:-1}).limit(1).lean().exec();
+        const concursos = await ConcursosDB.find({}).sort({ _id: -1 }).limit(1).lean().exec();
 
-        return concurso;
+        var concurso = concursos[0];
+
+        var felipao;
+        var felipin;
+        var rodolfo;
+        var raul;
+        var vini;
+        var will;
+        var thiago;
+
+        concurso.acertos.forEach((acerto) => {
+            if (acerto.aposta == "Felipão") {
+                felipao = {
+                    acertos: acerto.quantidade,
+                    premio: acerto.valorPremio
+                };
+            }
+
+            if (acerto.aposta == "Felipin") {
+                felipin = {
+                    acertos: acerto.quantidade,
+                    premio: acerto.valorPremio
+                };
+            }
+
+            if (acerto.aposta == "Rodolfo") {
+                rodolfo = {
+                    acertos: acerto.quantidade,
+                    premio: acerto.valorPremio
+                };
+            }
+
+            if (acerto.aposta == "Raul") {
+                raul = {
+                    acertos: acerto.quantidade,
+                    premio: acerto.valorPremio
+                };
+            }
+
+            if (acerto.aposta == "Will") {
+                will = {
+                    acertos: acerto.quantidade,
+                    premio: acerto.valorPremio
+                };
+            }
+
+            if (acerto.aposta == "Vini") {
+                vini = {
+                    acertos: acerto.quantidade,
+                    premio: acerto.valorPremio
+                };
+            }
+
+            if (acerto.aposta == "Thiago") {
+                thiago = {
+                    acertos: acerto.quantidade,
+                    premio: acerto.valorPremio
+                };
+            }
+        });
+
+
+        return {
+            data: concurso.data,
+            numero: concurso.id,
+            felipao,
+            felipin,
+            rodolfo,
+            raul,
+            vini,
+            will,
+            thiago,
+        };
     }
 
     async dashboard() {
